@@ -1,0 +1,48 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard"
+    },
+    {
+      "menuHeader": "Cadastros"
+    },
+    {
+      "name": "Produtos",
+      "icon": "menu-icon tf-icons bx bxl-product-hunt",
+      "slug": "users-module"
+    },
+    {
+      "name": "Fornecedores",
+      "icon": "menu-icon tf-icons bx bx-group",
+      "slug": "users-module"
+    },
+    {
+      "name": "Clientes",
+      "icon": "menu-icon tf-icons bx bxs-group",
+      "slug": "users-module"
+    },
+    {
+      "menuHeader": "Configurações"
+    },
+    {
+      "name": "Usuários",
+      "icon": "menu-icon tf-icons bx bx-user",
+      "slug": "users-module",
+      "submenu": [
+        {
+          "url": "access",
+          "name": "Permissões de acesso",
+          "slug": "access-manager"
+        },
+        {
+          "url": "users",
+          "name": "Gerenciar usuários",
+          "slug": "users-manager"
+        }
+      ]
+    }
+  ]
+}
