@@ -1,7 +1,14 @@
-@extends('layouts/blankLayout')
+@php
+    $container = 'container-fluid';
+    $containerNav = 'container-fluid';
+@endphp
+
+@extends('layouts/contentNavbarLayout')
+
+@section('title', 'Usuários')
 
 @section('content')
-    <div class="container">
+    <div class="card">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -13,12 +20,14 @@
 
                             <div class="form-group">
                                 <label for="name">Nome</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                                <input type="text" name="name" id="name" class="form-control"
+                                    value="{{ old('name') }}" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+                                <input type="email" name="email" id="email" class="form-control"
+                                    value="{{ old('email') }}" required>
                             </div>
 
                             <div class="form-group">
@@ -36,3 +45,5 @@
         </div>
     </div>
 @endsection
+
+<script src="{{ asset('assets/js/users/user.js') }}"></script>

@@ -46,7 +46,6 @@
             </table>
         </div>
     </div>
-    <!--/ Layout Demo -->
 @endsection
 
 <script src="{{ asset('assets/js/users/user.js') }}"></script>

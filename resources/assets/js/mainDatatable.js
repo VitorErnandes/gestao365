@@ -423,6 +423,7 @@ window.onload = function () {
   $('.dataTables_length').addClass('mt-0 mt-md-3 me-2');
   $('.dt-action-buttons').addClass('pt-0');
   $('.dt-buttons').addClass('d-flex flex-wrap');
+  $('.card-header').addClass('justify-content-between');
 
   $('.datatables-customers tbody').on('click', '.delete-record', function () {
     e.row($(this).parents('tr')).remove().draw();
