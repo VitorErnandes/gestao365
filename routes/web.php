@@ -10,6 +10,6 @@ Route::post('/users/store', [UserController::class, 'store'])->name('users.store
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{id}', [UserController::class, 'updateUser'])->name('users.update');
-Route::get('/users/{id}/passwordEdit', [UserController::class, 'passwordEdit'])->name('users.passwordEdit');
-Route::put('/users/passwordEdit/{id}', [UserController::class, 'updatePassword'])->name('users.passwordUpdate');
+Route::get('/users/{id}/editPassword', [UserController::class, 'editPassword'])->name('users.editPassword');
+Route::put('/users/editPassword/{id}', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 Route::delete('/users/{id}', [UserController::class, 'destroyUser'])->name('users.destroy');

@@ -95,10 +95,10 @@ class UserController extends User
     }
   }
 
-  public function passwordEdit($id)
+  public function editPassword($id)
   {
     $user = User::find($id);
-    return view('users.passwordEdit', compact('user'));
+    return view('users.editPassword', compact('user'));
   }
 
   public function updatePassword(Request $request, $id)

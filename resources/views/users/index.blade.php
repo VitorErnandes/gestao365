@@ -35,7 +35,7 @@
                                         <a class="dropdown-item" href="users/{{ $user->id }}/edit"><i
                                                 class="bx bx-edit-alt me-1"></i>
                                             Editar</a>
-                                        <a class="dropdown-item" href="users/{{ $user->id }}/passwordEdit"><i
+                                        <a class="dropdown-item" href="users/{{ $user->id }}/editPassword"><i
                                                 class="bx bx-lock-alt me-1"></i>
                                             Alterar senha</a>
                                         <button class="dropdown-item" onclick="deactivateUser(this)"

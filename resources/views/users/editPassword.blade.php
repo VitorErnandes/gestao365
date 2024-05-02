@@ -15,7 +15,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             </button>
         </div>
-        <form method="POST" action="{{ route('users.passwordUpdate', $user->id) }}">
+        <form method="POST" action="{{ route('users.updatePassword', $user->id) }}">
             @csrf
             @method('PUT')
             <div class="row">
@@ -49,4 +49,4 @@
 @endsection
 
 <script src="{{ asset(mix('assets/js/globals/validation.js')) }}"></script>
-<script src="{{ asset(mix('assets/js/users/passwordEdit.js')) }}"></script>
+<script src="{{ asset(mix('assets/js/users/editPassword.js')) }}"></script>
