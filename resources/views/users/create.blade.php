@@ -50,5 +50,5 @@
     </div>
 @endsection
 
-<script src="{{ asset('assets/js/globals/validation.js') }}"></script>
-<script src="{{ asset('assets/js/users/createUser.js') }}"></script>
+<script src="{{ asset(mix('assets/js/globals/validation.js')) }}"></script>
+<script src="{{ asset(mix('assets/js/users/createUser.js')) }}"></script>

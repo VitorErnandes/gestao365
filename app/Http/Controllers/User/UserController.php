@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\User\User;
 
@@ -47,10 +48,18 @@ class UserController extends User
 
   public function destroyUser($id)
   {
-    $user = User::findOrFail($id);
-    $user->delete();
+    try {
+      $user = User::findOrFail($id);
+      $user->delete();
 
-    return redirect('/users')->with('success', 'Usuário excluído com sucesso!');
+      Session::flash('success', 'Usuário excluído com sucesso!');
+
+      return true;
+    } catch (\Exception $e) {
+      Session::flash('error', 'Erro ao excluir usuário: ' . $e->getMessage());
+
+      return false;
+    }
   }
 
   public function edit($id)

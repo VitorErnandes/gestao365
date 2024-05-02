@@ -47,7 +47,8 @@
 
                     <div class="p3">
                         @if ($errors->any())
-                            <div class="alert alert-danger alert-dismissible text-dark">
+                            <div class="alert alert-danger alert-dismissible fade show text-dark">
+                                <h4 class="alert-heading d-flex align-items-center mb-1">Atenção!</h4>
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -59,16 +60,18 @@
                         @endif
 
                         @if (session('error'))
-                            <div class="alert alert-danger alert-dismissible text-dark">
-                                <p>{{ session('error') }}</p>
+                            <div class="alert alert-danger alert-dismissible fade show text-dark">
+                                <h4 class="alert-heading d-flex align-items-center mb-1">Atenção!</h4>
+                                <p class="mb-0">{{ session('error') }}</p>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                 </button>
                             </div>
                         @endif
 
                         @if (session('success'))
-                            <div class="alert alert-success alert-dismissible text-dark">
-                                <p>{{ session('success') }}</p>
+                            <div class="alert alert-success alert-dismissible fade show text-dark">
+                                <h4 class="alert-heading d-flex align-items-center mb-1">Atenção!</h4>
+                                <p class="mb-0">{{ session('success') }}</p>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                 </button>
                             </div>

@@ -38,9 +38,9 @@
                                         <a class="dropdown-item" href="users/{{ $user->id }}/editPassword"><i
                                                 class="bx bx-lock-alt me-1"></i>
                                             Alterar senha</a>
-                                        <a class="dropdown-item" onclick="excluirUsuario(this)"
+                                        <button class="dropdown-item" onclick="deactivateUser(this)"
                                             value="{{ $user->id }}"><i class="bx bx-trash me-1"></i>
-                                            Excluir</a>
+                                            Excluir</button>
                                     </div>
                                 </div>
                             </td>
@@ -52,5 +52,5 @@
     </div>
 @endsection
 
-<script src="{{ asset('assets/js/users/user.js') }}"></script>
-<script src="{{ asset('assets/js/mainDatatable.js') }}"></script>
+<script src="{{ asset(mix('assets/js/users/user.js')) }}"></script>
+<script src="{{ asset(mix('assets/js/mainDatatable.js')) }}"></script>
