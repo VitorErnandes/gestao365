@@ -34,7 +34,7 @@ class UserController extends User
 
       $request['password'] = Hash::make($request['password']);
 
-      $user = User::create($request->all());
+      User::create($request->all());
 
       return redirect()->back()->with('success', 'Usuário cadastrado com sucesso!');
     } catch (QueryException $e) {
@@ -70,6 +70,8 @@ class UserController extends User
 
   public function updateUser(Request $request, $id)
   {
+    $users = User::all();
+
     try {
       $request->validate([
         'name' => 'required|string|max:255',
@@ -83,13 +85,37 @@ class UserController extends User
 
       $user->save();
 
-      return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
+      return redirect()->route('users.index', compact('users'))->with('success', 'Usuário atualizado com sucesso!');
     } catch (QueryException $e) {
       if ($e->errorInfo[1] == 1062) {
-        return redirect()->back()->with('error', 'Este endereço de e-mail já está em uso.');
+        return redirect()->route('users.index', compact('users'))->with('error', 'Este endereço de e-mail já está em uso.');
       } else {
-        return redirect()->back()->with('error', 'Erro ao atualizar usuário.');
+        return redirect()->route('users.index', compact('users'))->with('error', 'Erro ao atualizar usuário.');
       }
+    }
+  }
+
+  public function passwordEdit($id)
+  {
+    $user = User::find($id);
+    return view('users.passwordEdit', compact('user'));
+  }
+
+  public function updatePassword(Request $request, $id)
+  {
+    $users = User::all();
+
+    try {
+      $request->validate([
+        'password' => 'required|string|min:6',
+      ]);
+
+      User::where('id', $id)
+        ->update(['password' => Hash::make($request->password)]);
+
+      return redirect()->route('users.index', compact('users'))->with('success', 'Senha do usuário atualizada com sucesso!');
+    } catch (\Exception $e) {
+      return redirect()->route('users.index', compact('users'))->with('error', 'Erro ao atualizar senha do usuário.');
     }
   }
 }
