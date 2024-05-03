@@ -33,7 +33,7 @@
       "slug": "users-module",
       "submenu": [
         {
-          "url": "access",
+          "url": "accessManager",
           "name": "Permissões de acesso",
           "slug": "access-manager"
         },

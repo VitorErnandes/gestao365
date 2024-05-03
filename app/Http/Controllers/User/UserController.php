@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\User\User;
 
@@ -14,12 +15,20 @@ class UserController extends User
 
   public function index()
   {
+    // if (Gate::denies('view_users')) {
+    //   abort(403, 'Você não tem permissão para visualizar a listagem de usuários.');
+    // }
+
     $users = User::all();
     return view('users.index', compact('users'));
   }
 
   public function create()
   {
+    // if (Gate::denies('create_users')) {
+    //   abort(403, 'Você não tem permissão para cadastrar usuários.');
+    // }
+
     return view('users.create');
   }
 
