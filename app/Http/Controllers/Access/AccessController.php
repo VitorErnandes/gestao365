@@ -17,7 +17,7 @@ class AccessController extends Controller
         return view('accessManager.permissions', compact('permissions', 'users'));
     }
 
-    public function assignPermission(Request $request)
+    public function assign(Request $request)
     {
         // Validação dos dados do formulário
         $validatedData = $request->validate([
@@ -38,7 +38,7 @@ class AccessController extends Controller
         return redirect()->back()->with('success', 'Permissão atribuída com sucesso ao usuário.');
     }
 
-    public function showCreatePermissionForm()
+    public function create()
     {
         return view('accessManager.create');
     }

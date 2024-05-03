@@ -18,5 +18,5 @@ Route::delete('/users/{id}', [UserController::class, 'destroyUser'])->name('user
 
 //Acesso
 Route::get('/accessManager', [AccessController::class, 'permissions'])->name('access.permissions'); //->middleware('auth'); use para redrecionar para login
-Route::post('/accessManager/assignPermission', 'AccessManagerController@assignPermission')->name('access.assign');
-Route::create('/accessManager/create', 'AccessManagerController@showAssignPermissionForm')->name('access');
+Route::post('/accessManager/assign', [AccessController::class, 'assign'])->name('access.assign');
+Route::get('/accessManager/create', [AccessController::class, 'create'])->name('access.create');
