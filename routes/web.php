@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Access\AccessController;
 
-//Usuarios
+//Permissions
+Route::resource('permissions', App\Http\Controllers\Permission\PermissionController::class);
+
+//Users
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
@@ -14,9 +16,3 @@ Route::put('/users/{id}', [UserController::class, 'updateUser'])->name('users.up
 Route::get('/users/{id}/editPassword', [UserController::class, 'editPassword'])->name('users.editPassword');
 Route::put('/users/editPassword/{id}', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 Route::delete('/users/{id}', [UserController::class, 'destroyUser'])->name('users.destroy');
-
-
-//Acesso
-Route::get('/accessManager', [AccessController::class, 'permissions'])->name('access.permissions'); //->middleware('auth'); use para redrecionar para login
-Route::post('/accessManager/assign', [AccessController::class, 'assign'])->name('access.assign');
-Route::get('/accessManager/create', [AccessController::class, 'create'])->name('access.create');
