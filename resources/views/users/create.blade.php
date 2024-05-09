@@ -51,4 +51,3 @@
 @endsection
 
 <script src="{{ asset(mix('assets/js/globals/validation.js')) }}"></script>
-<script src="{{ asset(mix('assets/js/users/userCreate.js')) }}"></script>

@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Permission\PermissionController;
 
 //Permissions
-Route::resource('permissions', App\Http\Controllers\Permission\PermissionController::class);
+Route::resource('permissions', PermissionController::class);
+Route::delete('/permissions/{id}', [PermissionController::class, 'destroyPermission'])->name('permissions.destroy');
 
 //Users
 Route::get('/users', [UserController::class, 'index'])->name('users.index');

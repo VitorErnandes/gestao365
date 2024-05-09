@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary" id="submitButton" disabled>Alterar Usuário</button>
+                    <button type="submit" class="btn btn-warning" id="submitButton" disabled>Alterar Usuário</button>
                 </div>
             </div>
         </form>
@@ -40,4 +40,3 @@
 @endsection
 
 <script src="{{ asset(mix('assets/js/globals/validation.js')) }}"></script>
-<script src="{{ asset(mix('assets/js/users/userEdit.js')) }}"></script>
