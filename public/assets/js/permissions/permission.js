@@ -10,7 +10,7 @@ function deactivatePermission(e) {
   }).then(result => {
     if (result.isConfirmed) {
       $.ajax({
-        url: '/permissions/' + permission,
+        url: window.location.href + '/' + permission,
         type: 'POST',
         headers: {
           'X-CSRF-TOKEN': csrfToken
