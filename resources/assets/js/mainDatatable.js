@@ -381,7 +381,7 @@ window.onload = function () {
         ]
       },
       {
-        text: '<span class="d-none d-sm-inline-block">Adicionar</span>',
+        text: '<span class="d-sm-inline-block"><i class="bx bx-plus me-2" ></i>Adicionar</span>',
         className: 'add-new btn btn-primary',
         attr: {
           'data-bs-toggle': 'offcanvas',
@@ -422,7 +422,7 @@ window.onload = function () {
 
   $('.dataTables_length').addClass('mt-0 mt-md-3 me-2');
   $('.dt-action-buttons').addClass('pt-0');
-  $('.dt-buttons').addClass('d-flex flex-wrap');
+  $('.dt-buttons').addClass('d-flex flex-wrap mb-2');
   $('.card-header').addClass('justify-content-between');
 
   $('.datatables-customers tbody').on('click', '.delete-record', function () {
@@ -431,7 +431,7 @@ window.onload = function () {
 
   setTimeout(() => {
     $('.dataTables_filter .form-control').removeClass('form-control-sm');
-    $('#dt-search-0').removeClass('form-control-sm');
+    $('#dt-search-0').addClass('mb-2').removeClass('form-control-sm');
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
 };
