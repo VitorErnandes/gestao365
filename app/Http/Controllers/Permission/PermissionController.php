@@ -60,7 +60,7 @@ class PermissionController extends Controller
         }
     }
 
-    public function destroyPermission($id)
+    public function destroy($id)
     {
         try {
             $permission = Permission::findOrFail($id);
