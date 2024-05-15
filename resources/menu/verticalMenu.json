@@ -28,7 +28,7 @@
       "menuHeader": "Configurações"
     },
     {
-      "name": "Usuários",
+      "name": "Acesso",
       "icon": "menu-icon tf-icons bx bx-user",
       "slug": "users-module",
       "submenu": [
@@ -44,7 +44,7 @@
         },
         {
           "url": "users",
-          "name": "Gerenciar usuários",
+          "name": "Cadastros de usuários",
           "slug": "users-manager"
         }
       ]

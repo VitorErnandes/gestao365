@@ -40,3 +40,4 @@
 @endsection
 
 <script src="{{ asset(mix('assets/js/globals/validation.js')) }}"></script>
+<script src="{{ asset('assets/js/users/editUser.js') }}"></script>
