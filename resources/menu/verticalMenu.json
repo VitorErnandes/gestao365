@@ -38,6 +38,11 @@
           "slug": "access-manager"
         },
         {
+          "url": "roles",
+          "name": "Regras de usuários",
+          "slug": "roles-manager"
+        },
+        {
           "url": "users",
           "name": "Gerenciar usuários",
           "slug": "users-manager"
