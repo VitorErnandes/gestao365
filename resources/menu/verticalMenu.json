@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "url": "/",
+      "url": "/dashboard",
       "name": "Dashboards",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard"
@@ -12,17 +12,20 @@
     {
       "name": "Produtos",
       "icon": "menu-icon tf-icons bx bxl-product-hunt",
-      "slug": "users-module"
+      "slug": "users-module",
+      "url": "products"
     },
     {
       "name": "Fornecedores",
       "icon": "menu-icon tf-icons bx bx-group",
-      "slug": "users-module"
+      "slug": "users-module",
+      "url": "suppliers"
     },
     {
       "name": "Clientes",
       "icon": "menu-icon tf-icons bx bxs-group",
-      "slug": "users-module"
+      "slug": "users-module",
+      "url": "customers"
     },
     {
       "menuHeader": "Configurações"
