@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\User\User;
+use Spatie\Permission\Models\Role;
 
 class UserController extends User
 {
@@ -21,7 +22,11 @@ class UserController extends User
 
   public function create()
   {
-    return view('users.create');
+    $roles = Role::pluck('name', 'name')->all();
+
+    return view('users.create', [
+      'roles' => $roles,
+    ]);
   }
 
   public function store(Request $request)
@@ -31,11 +36,18 @@ class UserController extends User
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255',
         'password' => 'required|string|min:6',
+        'roles' => 'required'
       ]);
 
       $request['password'] = Hash::make($request['password']);
 
-      User::create($request->all());
+      $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request['password'])
+      ]);
+
+      $user->syncRoles($request->roles);
 
       return redirect()->back()->with('success', 'Usuário cadastrado com sucesso!');
     } catch (QueryException $e) {

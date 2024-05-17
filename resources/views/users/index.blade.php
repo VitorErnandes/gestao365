@@ -18,6 +18,7 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Criado em</th>
+                        <th>Permissões</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
@@ -29,6 +30,13 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
+                            <td>
+                                @if (!empty($user->getRoleNames()))
+                                    @foreach ($user->getRoleNames() as $rolename)
+                                        <label for="badge badge-primary m-1">{{ $rolename }}</label>
+                                    @endforeach
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

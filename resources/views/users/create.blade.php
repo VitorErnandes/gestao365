@@ -41,6 +41,14 @@
                     <label for="confirmPassword">Confirmar senha</label>
                     <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" required>
                 </div>
+                <div class="col-lg-12 col-sm-12">
+                    <label for="Roles">Grupos de permissões</label>
+                    <select name="roles[]" id="roles" class="form-control" multiple>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role }}">{{ $role }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary" id="submitButton" disabled>Criar Usuário</button>

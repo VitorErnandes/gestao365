@@ -15,8 +15,8 @@
 
             <div class="row mb-4">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="regra">Regra</label>
-                    <input type="text" name="regra" id="regra" class="form-control" value="{{ $role->name }}"
+                    <label for="role">Regra</label>
+                    <input type="text" name="role" id="role" class="form-control" value="{{ $role->name }}"
                         disabled>
                 </div>
             </div>
