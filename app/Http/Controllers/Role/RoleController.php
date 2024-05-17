@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -73,6 +75,35 @@ class RoleController extends Controller
             Session::flash('error', 'Erro ao excluir regra. ' . $e->getMessage());
 
             return false;
+        }
+    }
+
+    public function addPermissionToRole($id)
+    {
+        $permissions = Permission::get();
+        $role = Role::findOrFail($id);
+        $rolePermissions = DB::table('role_has_permissions')->where('role_id', $role->id)->pluck('permission_id', 'permission_id')->all();
+
+        return view('roles.role-permission', [
+            'role' => $role,
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions
+        ]);
+    }
+
+    public function givePermissionToRole(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'permission' => 'required'
+            ]);
+
+            $role = Role::findOrFail($id);
+            $role->syncPermissions($request->permission);
+
+            return redirect()->back()->with('success', 'Permissões adicionadas à regra.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Erro ao adicionar permissão à regra. ' . $th->getMessage());
         }
     }
 }

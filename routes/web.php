@@ -13,6 +13,8 @@ Route::delete('/permissions/{id}', [PermissionController::class, 'destroy'])->na
 // Roles
 Route::resource('roles', RoleController::class);
 Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+Route::get('/roles/{id}/give-permissions', [RoleController::class, 'addPermissionToRole'])->name('roles.addPermissionToRole');
+Route::put('/roles/{id}/give-permissions', [RoleController::class, 'givePermissionToRole'])->name('roles.givePermissionToRole');
 
 //Users
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
