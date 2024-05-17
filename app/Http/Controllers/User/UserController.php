@@ -17,7 +17,7 @@ class UserController extends User
   public function index()
   {
     $users = User::all();
-    return view('users.index', compact('users'));
+    return view('users.index', ['users' => $users]);
   }
 
   public function create()
@@ -36,7 +36,7 @@ class UserController extends User
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255',
         'password' => 'required|string|min:6',
-        'roles' => 'required'
+        'roles' => 'required',
       ]);
 
       $request['password'] = Hash::make($request['password']);
@@ -44,17 +44,23 @@ class UserController extends User
       $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => Hash::make($request['password'])
+        'password' => Hash::make($request['password']),
       ]);
 
       $user->syncRoles($request->roles);
 
-      return redirect()->back()->with('success', 'Usuário cadastrado com sucesso!');
+      return redirect()
+        ->back()
+        ->with('success', 'Usuário cadastrado com sucesso!');
     } catch (QueryException $e) {
       if ($e->errorInfo[1] == 1062) {
-        return redirect()->back()->with('error', 'Este endereço de e-mail já está em uso.');
+        return redirect()
+          ->back()
+          ->with('error', 'Este endereço de e-mail já está em uso.');
       } else {
-        return redirect()->back()->with('error', 'Erro ao cadastrar usuário.');
+        return redirect()
+          ->back()
+          ->with('error', 'Erro ao cadastrar usuário.');
       }
     }
   }
@@ -98,12 +104,18 @@ class UserController extends User
 
       $user->save();
 
-      return redirect()->route('users.index', compact('users'))->with('success', 'Usuário atualizado com sucesso!');
+      return redirect()
+        ->route('users.index', compact('users'))
+        ->with('success', 'Usuário atualizado com sucesso!');
     } catch (QueryException $e) {
       if ($e->errorInfo[1] == 1062) {
-        return redirect()->route('users.index', compact('users'))->with('error', 'Este endereço de e-mail já está em uso.');
+        return redirect()
+          ->route('users.index', compact('users'))
+          ->with('error', 'Este endereço de e-mail já está em uso.');
       } else {
-        return redirect()->route('users.index', compact('users'))->with('error', 'Erro ao atualizar usuário.');
+        return redirect()
+          ->route('users.index', compact('users'))
+          ->with('error', 'Erro ao atualizar usuário.');
       }
     }
   }
@@ -123,12 +135,15 @@ class UserController extends User
         'password' => 'required|string|min:6',
       ]);
 
-      User::where('id', $id)
-        ->update(['password' => Hash::make($request->password)]);
+      User::where('id', $id)->update(['password' => Hash::make($request->password)]);
 
-      return redirect()->route('users.index', compact('users'))->with('success', 'Senha do usuário atualizada com sucesso!');
+      return redirect()
+        ->route('users.index', compact('users'))
+        ->with('success', 'Senha do usuário atualizada com sucesso!');
     } catch (\Exception $e) {
-      return redirect()->route('users.index', compact('users'))->with('error', 'Erro ao atualizar senha do usuário.');
+      return redirect()
+        ->route('users.index', compact('users'))
+        ->with('error', 'Erro ao atualizar senha do usuário.');
     }
   }
 }
