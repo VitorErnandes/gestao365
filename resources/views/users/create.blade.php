@@ -42,7 +42,7 @@
                     <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" required>
                 </div>
                 <div class="col-lg-12 col-sm-12">
-                    <label for="Roles">Grupos de permissões</label>
+                    <label for="roles">Grupos de permissões</label>
                     <select name="roles[]" id="roles" class="form-control" multiple>
                         @foreach ($roles as $role)
                             <option value="{{ $role }}">{{ $role }}</option>

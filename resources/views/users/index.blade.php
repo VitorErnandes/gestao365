@@ -30,10 +30,10 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
-                            <td class="text-dark">
+                            <td>
                                 @if (!empty($user->getRoleNames()))
                                     @foreach ($user->getRoleNames() as $rolename)
-                                        <label for="badge badge-primary m-1">{{ $rolename }}</label>
+                                        <label class="badge bg-primary mx-1">{{ $rolename }}</label>
                                     @endforeach
                                 @endif
                             </td>
