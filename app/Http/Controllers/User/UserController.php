@@ -84,7 +84,9 @@ class UserController extends User
   public function edit($id)
   {
     $user = User::find($id);
-    return view('users.edit', compact('user'));
+    $roles = Role::pluck('name', 'name')->all();
+    $userRoles = $user->roles->pluck('name', 'name')->all();
+    return view('users.edit', ["user" => $user, "roles" => $roles, "userRoles" => $userRoles]);
   }
 
   public function updateUser(Request $request, $id)
@@ -95,6 +97,7 @@ class UserController extends User
       $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255' . $id,
+        'roles' => 'required'
       ]);
 
       $user = User::findOrFail($id);
@@ -103,6 +106,7 @@ class UserController extends User
       $user->email = $request->email;
 
       $user->save();
+      $user->syncRoles($request->roles);
 
       return redirect()
         ->route('users.index', compact('users'))

@@ -30,7 +30,15 @@
                     <input type="email" name="email" id="email" class="form-control"
                         placeholder="vitor.ernandes@email.com" value="{{ $user->email }}" required>
                 </div>
-
+                <div class="col-lg-12 col-sm-12">
+                    <label for="roles">Grupos de permissões</label>
+                    <select name="roles[]" id="roles" class="form-control" multiple>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role }}" {{ in_array($role, $userRoles) ? 'selected' : '' }}>
+                                {{ $role }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="mt-4">
                     <button type="submit" class="btn btn-warning" id="submitButton" disabled>Alterar Usuário</button>
                 </div>
