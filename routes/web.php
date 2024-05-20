@@ -1,20 +1,23 @@
 <?php
 
+require __DIR__ . '/auth.php';
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
 
-Route::group(['middleware' => ['role:super-admin|admin']], function () {
+Route::group(['middleware' => 'auth'], function () {
     //Permissions
     Route::resource('permissions', PermissionController::class);
-    Route::delete('/permissions/{id}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+    Route::delete('/permissions/{id}', [PermissionController::class, 'destroyPermission'])->name('permissions.destroy');
 
     // Roles
     Route::resource('roles', RoleController::class);
-    Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+    Route::delete('/roles/{id}', [RoleController::class, 'destroyRole'])->name('roles.destroy');
     Route::get('/roles/{id}/give-permissions', [RoleController::class, 'addPermissionToRole'])->name('roles.addPermissionToRole');
     Route::put('/roles/{id}/give-permissions', [RoleController::class, 'givePermissionToRole'])->name('roles.givePermissionToRole');
 
