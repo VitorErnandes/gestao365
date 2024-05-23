@@ -1,16 +1,17 @@
 <?php
 
+
 namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\User\User;
 use Spatie\Permission\Models\Role;
 
-class UserController extends User
+class UserController extends Controller
 {
   protected $table = 'users';
 
@@ -36,7 +37,8 @@ class UserController extends User
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255',
         'password' => 'required|string|min:6',
-        'roles' => 'required',
+        'roles' => 'required|array',
+        'roles.*' => 'exists:roles,name'
       ]);
 
       $request['password'] = Hash::make($request['password']);
