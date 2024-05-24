@@ -42,15 +42,21 @@
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                         data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="users/{{ $user->id }}/edit"><i
-                                                class="bx bx-edit-alt me-1"></i>
-                                            Editar</a>
-                                        <a class="dropdown-item" href="users/{{ $user->id }}/editPassword"><i
-                                                class="bx bx-lock-alt me-1"></i>
-                                            Alterar senha</a>
-                                        <button class="dropdown-item" onclick="deactivateUser(this)"
-                                            value="{{ $user->id }}"><i class="bx bx-trash me-1"></i>
-                                            Excluir</button>
+                                        @can('Alterar usuário')
+                                            <a class="dropdown-item" href="users/{{ $user->id }}/edit"><i
+                                                    class="bx bx-edit-alt me-1"></i>
+                                                Editar</a>
+                                        @endcan
+                                        @can('Alterar senha usuário')
+                                            <a class="dropdown-item" href="users/{{ $user->id }}/editPassword"><i
+                                                    class="bx bx-lock-alt me-1"></i>
+                                                Alterar senha</a>
+                                        @endcan
+                                        @can('Excluir usuário')
+                                            <button class="dropdown-item" onclick="deactivateUser(this)"
+                                                value="{{ $user->id }}"><i class="bx bx-trash me-1"></i>
+                                                Excluir</button>
+                                        @endcan
                                     </div>
                                 </div>
                             </td>

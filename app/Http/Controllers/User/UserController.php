@@ -6,6 +6,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User\User;
@@ -14,6 +15,15 @@ use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
   protected $table = 'users';
+
+  public function __construct()
+  {
+    $this->middleware('permission:Visualizar usuários', ['only' => ['index']]);
+    $this->middleware('permission:Cadastrar usuário', ['only' => ['create', 'store']]);
+    $this->middleware('permission:Alterar usuário', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:Alterar senha usuário', ['only' => ['editPassword', 'updatePassword']]);
+    $this->middleware('permission:Excluir usuário', ['only' => ['destroyUser']]);
+  }
 
   public function index()
   {
@@ -128,6 +138,11 @@ class UserController extends Controller
 
   public function editPassword($id)
   {
+    $sessionId = Auth::user()->id;
+
+    if ($sessionId != $id)
+      return redirect()->route('users.editPassword', ['id' => $sessionId]);
+
     $user = User::find($id);
     return view('users.editPassword', compact('user'));
   }

@@ -10,7 +10,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
 
-Route::group(['middleware' => ['role:super-admin']], function () {
+Route::group(['middleware' => ['role:super-admin|Usuário']], function () {
     //Permissions
     Route::resource('permissions', PermissionController::class);
     Route::delete('/permissions/{id}', [PermissionController::class, 'destroyPermission'])->name('permissions.destroy');
@@ -22,12 +22,9 @@ Route::group(['middleware' => ['role:super-admin']], function () {
     Route::put('/roles/{id}/give-permissions', [RoleController::class, 'givePermissionToRole'])->name('roles.givePermissionToRole');
 
     //Users
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{id}', [UserController::class, 'updateUser'])->name('users.update');
+    Route::resource('users', UserController::class);
     Route::delete('/users/{id}', [UserController::class, 'destroyUser'])->name('users.destroy');
-    Route::get('/users/{id}/editPassword', [UserController::class, 'editPassword'])->name('users.editPassword');
-    Route::put('/users/editPassword/{id}', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 });
+
+Route::get('/users/{id}/editPassword', [UserController::class, 'editPassword'])->name('users.editPassword')->middleware('permission:Alterar senha usuário');
+Route::put('/users/editPassword/{id}', [UserController::class, 'updatePassword'])->name('users.updatePassword')->middleware('permission:Alterar senha usuário');

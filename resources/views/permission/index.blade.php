@@ -28,12 +28,17 @@
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                         data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="permissions/{{ $permissions->id }}/edit"><i
-                                                class="bx bx-edit-alt me-1"></i>
-                                            Editar</a>
-                                        <button class="dropdown-item" onclick="deactivatePermission(this)"
-                                            value="{{ $permissions->id }}"><i class="bx bx-trash me-1"></i>
-                                            Excluir</button>
+
+                                        @can('Alterar permissão')
+                                            <a class="dropdown-item" href="permissions/{{ $permissions->id }}/edit"><i
+                                                    class="bx bx-edit-alt me-1"></i>
+                                                Editar</a>
+                                        @endcan
+                                        @can('Excluir permissão')
+                                            <button class="dropdown-item" onclick="deactivatePermission(this)"
+                                                value="{{ $permissions->id }}"><i class="bx bx-trash me-1"></i>
+                                                Excluir</button>
+                                        @endcan
                                     </div>
                                 </div>
                             </td>
