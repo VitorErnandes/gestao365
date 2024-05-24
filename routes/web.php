@@ -26,5 +26,14 @@ Route::group(['middleware' => ['role:super-admin|Usuário']], function () {
     Route::delete('/users/{id}', [UserController::class, 'destroyUser'])->name('users.destroy');
 });
 
+Route::get('/dashboard', [App\Http\Controllers\Global\GlobalController::class, 'dashboard'])
+    ->name('dashboard');
+
+Route::get('/welcome', [App\Http\Controllers\Global\GlobalController::class, 'index'])
+    ->name('dashboard');
+
+Route::get('/index', [App\Http\Controllers\Global\GlobalController::class, 'index'])
+    ->name('dashboard');
+
 Route::get('/users/{id}/editPassword', [UserController::class, 'editPassword'])->name('users.editPassword')->middleware('permission:Alterar senha usuário');
 Route::put('/users/editPassword/{id}', [UserController::class, 'updatePassword'])->name('users.updatePassword')->middleware('permission:Alterar senha usuário');
