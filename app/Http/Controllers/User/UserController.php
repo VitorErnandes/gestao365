@@ -77,7 +77,7 @@ class UserController extends Controller
     }
   }
 
-  public function destroyUser($id)
+  public function destroy($id)
   {
     try {
       $user = User::findOrFail($id);
