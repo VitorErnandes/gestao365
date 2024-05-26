@@ -5,7 +5,7 @@ O projeto foi criado com o laravel 10 utilizando o template sneat-bootstrap-html
 Para utilizar o sistema, é necessário seguis os passoa abaixo.
 
 1. Clonar o repositório.
-2. Criar ou alterar caso já exista, o arquivo .env na raiz do projeto
+2. Criar ou alterar caso já exista, o arquivo .env na raiz do projeto. Pode se utilizar o .env.example caso queira, porém precisa-se renomea-lo para .env.
 3. Ajustar a conexão com o banco de dados no arquivo .env. O projeto foi projetado no mysql, então recomando que seja utilizado-o também para evitar quaisquer incopatibilidades.
 4. Executar o comando para criar as migrations e seeds no banco de dados: php artisan migrate --seed
 
