@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\Global\GlobalController;
+use App\Http\Controllers\Product\ProductController;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:super-admin|Usuário']], function () {
@@ -24,13 +26,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('users', UserController::class);
     });
 
-    Route::get('/dashboard', [App\Http\Controllers\Global\GlobalController::class, 'dashboard'])
+    Route::get('/products', [ProductController::class, 'index'])
+        ->name('index');
+
+    Route::get('/dashboard', [GlobalController::class, 'dashboard'])
         ->name('dashboard');
 
-    Route::get('/welcome', [App\Http\Controllers\Global\GlobalController::class, 'index'])
+    Route::get('/welcome', [GlobalController::class, 'index'])
         ->name('dashboard');
 
-    Route::get('/index', [App\Http\Controllers\Global\GlobalController::class, 'index'])
+    Route::get('/index', [GlobalController::class, 'index'])
         ->name('dashboard');
 
     Route::get('/users/{id}/editPassword', [UserController::class, 'editPassword'])->name('users.editPassword')->middleware('permission:Alterar senha usuário');
