@@ -13,7 +13,19 @@
       "name": "Produtos",
       "icon": "menu-icon tf-icons bx bxl-product-hunt",
       "slug": "users-module",
-      "url": "products"
+      "url": "products",
+      "submenu": [
+        {
+          "url": "products",
+          "name": "Cadastro de produtos",
+          "slug": "products-manager"
+        },
+        {
+          "url": "categories",
+          "name": "Grupos de produtos",
+          "slug": "products-group-manager"
+        }
+      ]
     },
     {
       "name": "Fornecedores",
