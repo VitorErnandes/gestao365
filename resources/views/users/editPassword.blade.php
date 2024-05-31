@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-warning" id="submitButton" disabled>Alterar Usuário</button>
+                    <button type="submit" class="btn btn-warning" id="submitButton" disabled>Alterar Senha</button>
                 </div>
             </div>
         </form>
