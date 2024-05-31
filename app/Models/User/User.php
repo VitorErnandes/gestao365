@@ -9,6 +9,7 @@ class User extends Authenticatable
 {
   use HasRoles;
 
+  protected $table = 'users';
   protected $guard_name = "web";
 
   /**

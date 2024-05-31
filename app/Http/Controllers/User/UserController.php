@@ -14,8 +14,6 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-  protected $table = 'users';
-
   public function __construct()
   {
     $this->middleware('permission:Visualizar usuários', ['only' => ['index']]);
