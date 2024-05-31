@@ -25,7 +25,12 @@ class PermissionSeeder extends Seeder
             'Cadastrar usuário',
             'Alterar usuário',
             'Alterar senha usuário',
-            'Excluir usuário'
+            'Excluir usuário',
+
+            'Visualizar grupos produtos',
+            'Cadastrar grupo produtos',
+            'Alterar grupo produtos',
+            'Excluir grupo produtos'
         ];
 
         foreach ($permissions as $permission) {

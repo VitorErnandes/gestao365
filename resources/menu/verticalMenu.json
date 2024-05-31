@@ -21,7 +21,7 @@
           "slug": "products-manager"
         },
         {
-          "url": "categories",
+          "url": "products-group",
           "name": "Grupos de produtos",
           "slug": "products-group-manager"
         }
