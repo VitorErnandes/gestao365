@@ -18,9 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function formValidation() {
   const name = document.getElementById('name').value;
+  const status = document.getElementById('status').value;
+  const description = document.getElementById('description').value;
   const submitButton = document.getElementById('submitButton');
 
-  if (name.length > 5) {
+  if (name.length > 5 && description.length > 10) {
     submitButton.removeAttribute('disabled');
   } else {
     submitButton.setAttribute('disabled', 'disabled');

@@ -1,1 +1,24 @@
-function deactivatePermission(e){const t=e.value,o=document.querySelector('meta[name="csrf-token"]').getAttribute("content");Swal.fire({title:"Confirmação",html:"Realmente deseja desativar esta permissão?",showCancelButton:!0,confirmButtonColor:"#C82333"}).then((e=>{e.isConfirmed&&$.ajax({url:window.location.href+"/"+t,type:"POST",headers:{"X-CSRF-TOKEN":o},data:{_method:"delete"}}).always((function(){window.location.reload()}))}))}
+function deactivatePermission(e) {
+  const permission = e.value;
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  Swal.fire({
+    title: 'Confirmação',
+    html: 'Realmente deseja desativar esta permissão?',
+    showCancelButton: true,
+    confirmButtonColor: '#C82333'
+  }).then(result => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: window.location.href + '/' + permission,
+        type: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': csrfToken
+        },
+        data: { _method: 'delete' }
+      }).always(function () {
+        window.location.reload();
+      });
+    }
+  });
+}

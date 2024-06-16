@@ -1,1 +1,29 @@
-function formValidation(){const t=document.getElementById("password").value,e=document.getElementById("confirmPassword").value,n=document.getElementById("submitButton");t.length>5&&t==e?n.removeAttribute("disabled"):n.setAttribute("disabled","disabled")}document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".form-control").forEach((function(t){t.addEventListener("change",(function(t){formValidation()})),t.addEventListener("click",(function(t){formValidation()})),t.addEventListener("keyup",(function(t){formValidation()}))}))}));
+document.addEventListener('DOMContentLoaded', function () {
+  const inputs = document.querySelectorAll('.form-control');
+
+  inputs.forEach(function (input) {
+    input.addEventListener('change', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('click', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('keyup', function (event) {
+      formValidation();
+    });
+  });
+});
+
+function formValidation() {
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  const submitButton = document.getElementById('submitButton');
+
+  if (password.length > 5 && password == confirmPassword) {
+    submitButton.removeAttribute('disabled');
+  } else {
+    submitButton.setAttribute('disabled', 'disabled');
+  }
+}
