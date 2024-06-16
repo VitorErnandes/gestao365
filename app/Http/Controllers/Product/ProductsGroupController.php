@@ -37,12 +37,12 @@ class ProductsGroupController extends Controller
             ->with('success', 'Grupo de produtos criado com sucesso.');
     }
 
-    public function edit(ProductsGroup $ProductsGroup)
+    public function edit(ProductsGroup $productsGroup)
     {
-        return view('products-group.edit', compact('ProductsGroup'));
+        return view('products-group.edit', compact('productsGroup'));
     }
 
-    public function update(Request $request, ProductsGroup $ProductsGroup)
+    public function update(Request $request, ProductsGroup $productsGroup)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -50,15 +50,15 @@ class ProductsGroupController extends Controller
             'status' => 'required|boolean',
         ]);
 
-        $ProductsGroup->update($request->all());
+        $productsGroup->update($request->all());
 
         return redirect()->route('products-group.index')
             ->with('success', 'Grupo de produtos atualizado com sucesso.');
     }
 
-    public function destroy(ProductsGroup $ProductsGroup)
+    public function destroy(ProductsGroup $productsGroup)
     {
-        $ProductsGroup->delete();
+        $productsGroup->delete();
 
         return redirect()->route('products-group.index')
             ->with('success', 'Grupo de produtos excluído com sucesso.');
