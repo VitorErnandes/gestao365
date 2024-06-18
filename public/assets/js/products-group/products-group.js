@@ -10,7 +10,7 @@ function deactivateProductGroup(e) {
   }).then(result => {
     if (result.isConfirmed) {
       $.ajax({
-        url: window.location.href + '/' + user,
+        url: window.location.href + '/' + group,
         type: 'POST',
         headers: {
           'X-CSRF-TOKEN': csrfToken

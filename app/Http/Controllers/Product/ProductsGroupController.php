@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Product\ProductsGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductsGroupController extends Controller
 {
@@ -21,20 +22,25 @@ class ProductsGroupController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|min:4',
-            'description' => 'nullable|string',
-            'status' => 'required|boolean',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255|min:4',
+                'description' => 'nullable|string',
+                'status' => 'required|boolean',
+            ]);
 
-        ProductsGroup::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'status' => $request->status
-        ]);
+            ProductsGroup::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'status' => $request->status
+            ]);
 
-        return redirect()->route('products-group.index')
-            ->with('success', 'Grupo de produtos criado com sucesso.');
+            return redirect()->route('products-group.index')
+                ->with('success', 'Grupo de produtos criado com sucesso.');
+        } catch (\Throwable $th) {
+            return redirect()->route('products-group.index')
+                ->with('error', 'Erro ao salvar grupo de produtos. ' . $th->getMessage());
+        }
     }
 
     public function edit(ProductsGroup $productsGroup)
@@ -44,23 +50,35 @@ class ProductsGroupController extends Controller
 
     public function update(Request $request, ProductsGroup $productsGroup)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'status' => 'required|boolean',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'status' => 'required|boolean',
+            ]);
 
-        $productsGroup->update($request->all());
+            $productsGroup->update($request->all());
 
-        return redirect()->route('products-group.index')
-            ->with('success', 'Grupo de produtos atualizado com sucesso.');
+            return redirect()->route('products-group.index')
+                ->with('success', 'Grupo de produtos alterado com sucesso.');
+        } catch (\Throwable $th) {
+            return redirect()->route('products-group.index')
+                ->with('error', 'Erro ao alterar grupo de produtos. ' . $th->getMessage());
+        }
     }
 
     public function destroy(ProductsGroup $productsGroup)
     {
-        $productsGroup->delete();
+        try {
+            $productsGroup->delete();
 
-        return redirect()->route('products-group.index')
-            ->with('success', 'Grupo de produtos excluído com sucesso.');
+            Session::flash('success', 'Grupo de produtos excluído com sucesso.');
+
+            return true;
+        } catch (\Exception $e) {
+            Session::flash('error', 'Erro ao excluir grupo de produto. ' . $e->getMessage());
+
+            return false;
+        }
     }
 }
