@@ -5,7 +5,7 @@
 
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Usuários')
+@section('title', 'Produtos')
 
 @section('content')
     <div class="card">
@@ -18,48 +18,16 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Criado em</th>
-                        <th>Permissões</th>
-                        <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($users as $user)
+                    @foreach ($products as $product)
                         <tr>
                             <td></td>
-                            <td class="text-center">{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->created_at->format('d/m/Y H:i:s') }}</td>
-                            <td>
-                                @if (!empty($user->getRoleNames()))
-                                    @foreach ($user->getRoleNames() as $rolename)
-                                        <label class="badge bg-primary mx-1">{{ $rolename }}</label>
-                                    @endforeach
-                                @endif
-                            </td>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
-                                    <div class="dropdown-menu">
-                                        @can('Alterar usuário')
-                                            <a class="dropdown-item" href="users/{{ $user->id }}/edit"><i
-                                                    class="bx bx-edit-alt me-1"></i>
-                                                Editar</a>
-                                        @endcan
-                                        @can('Alterar senha usuário')
-                                            <a class="dropdown-item" href="users/{{ $user->id }}/editPassword"><i
-                                                    class="bx bx-lock-alt me-1"></i>
-                                                Alterar senha</a>
-                                        @endcan
-                                        @can('Excluir usuário')
-                                            <button class="dropdown-item" onclick="deactivateUser(this)"
-                                                value="{{ $user->id }}"><i class="bx bx-trash me-1"></i>
-                                                Excluir</button>
-                                        @endcan
-                                    </div>
-                                </div>
-                            </td>
+                            <td class="text-center">{{ $product->id }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->description }}</td>
+                            <td>{{ $product->created_at->format('d/m/Y H:i:s') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -68,5 +36,5 @@
     </div>
 @endsection
 
-<script src="{{ asset(mix('assets/js/users/user.js')) }}"></script>
+<script src="{{ asset(mix('assets/js/products/products.js')) }}"></script>
 <script src="{{ asset(mix('assets/js/mainDatatable.js')) }}"></script>
