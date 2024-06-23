@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="ean" class="form-label">Código de barras</label>
-                    <input type="number" class="form-control" id="ean" name="brand" required>
+                    <input type="number" class="form-control" id="ean" name="ean" required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="measurement_unit" class="form-label">Código de barras</label>
