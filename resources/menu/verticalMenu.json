@@ -22,7 +22,7 @@
         },
         {
           "url": "products-group",
-          "name": "Grupos de produtos",
+          "name": "Cadastro de grupos de produtos",
           "slug": "products-group-manager"
         }
       ]

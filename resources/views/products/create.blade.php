@@ -16,7 +16,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             </button>
         </div>
-        <form action="{{ route('products-group.store') }}" method="POST">
+        <form action="{{ route('products.store') }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-lg-8 col-sm-12">
@@ -32,9 +32,11 @@
                     <input type="number" class="form-control" id="ean" name="ean" required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                    <label for="measurement_unit" class="form-label">Código de barras</label>
-                    <select class="form-control" id="measurement_unit" name="measurement_unit" required>
-                        <option value=""></option>
+                    <label for="products_group" class="form-label">Grupo de produtos</label>
+                    <select class="form-control" id="products_group" name="products_group" required>
+                        @foreach ($productsGroupList as $group)
+                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-lg-3 col-sm-12">
@@ -46,6 +48,14 @@
                     <input type="text" class="form-control" id="sale_price" name="sale_price" required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
+                    <label for="measurement_unit" class="form-label">Unidade de medida</label>
+                    <select class="form-control" id="measurement_unit" name="measurement_unit" required>
+                        @foreach ($unitList as $unit)
+                            <option value="{{ $unit->id }}">{{ $unit->description }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-lg-3 col-sm-12">
                     <label for="stock_quantity" class="form-label">Quantidade de estoque</label>
                     <input type="text" class="form-control" id="stock_quantity" name="stock_quantity" required>
                 </div>
@@ -53,16 +63,16 @@
                     <label for="minimum_stock" class="form-label">Estoque minimo</label>
                     <input type="text" class="form-control" id="minimum_stock" name="minimum_stock" required>
                 </div>
-                <div class="col-lg-4 col-sm-12">
-                    <label for="image" class="form-label">Imagem</label>
-                    <input type="file" name="image" id="image" class="form-control" required>
-                </div>
-                <div class="col-lg-2 col-sm-12">
+                <div class="col-lg-3 col-sm-12">
                     <label for="status" class="form-label">Status</label>
                     <select class="form-control" id="status" name="status" required>
                         <option value="1">Ativo</option>
                         <option value="0">Inativo</option>
                     </select>
+                </div>
+                <div class="col-lg-12 col-sm-12">
+                    <label for="image" class="form-label">Imagem</label>
+                    <input type="file" name="image" id="image" class="form-control" required>
                 </div>
                 <div class="col-lg-12 col-sm-12">
                     <label for="description" class="form-label">Descrição</label>
