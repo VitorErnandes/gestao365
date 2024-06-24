@@ -30,7 +30,12 @@ class PermissionSeeder extends Seeder
             'Visualizar grupos produtos',
             'Cadastrar grupo produtos',
             'Alterar grupo produtos',
-            'Excluir grupo produtos'
+            'Excluir grupo produtos',
+
+            'Visualizar produtos',
+            'Cadastrar produto',
+            'Alterar produto',
+            'Excluir produto',
         ];
 
         foreach ($permissions as $permission) {
