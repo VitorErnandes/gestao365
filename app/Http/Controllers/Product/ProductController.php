@@ -7,6 +7,7 @@ use App\Models\Product\Product;
 use Illuminate\Http\Request;
 use App\Models\Product\ProductsGroup;
 use App\Models\Product\MeasurementUnit;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -29,43 +30,43 @@ class ProductController extends Controller
 
   public function store(Request $request)
   {
-    try {
-      $request->validate([
-        'name' => 'required|string|max:255|min:4',
-        'brand' => 'nullable|string|max:100',
-        'ean' => 'required|string|max:50|unique:products,ean',
-        'measurement_unit' => 'required|integer|exists:measurement_unit,id',
-        'purchase_price' => 'required|between:0,999999999.99',
-        'sale_price' => 'required|between:0,999999999.99',
-        'stock_quantity' => 'required|integer|min:0',
-        'minimum_stock' => 'required|integer|min:0',
-        'image' => 'nullable|string|max:255',
-        'status' => 'required|boolean',
-        'description' => 'required|string',
-        'observation' => 'nullable|string',
-      ]);
+    $request->merge(['measurement_unit_id' => $request->measurement_unit]);
 
-      Product::create([
-        'name' => $request->name,
-        'brand' => $request->brand,
-        'ean' => $request->ean,
-        'measurement_unit_id' => $request->measurement_unit,
-        'purchase_price' => $request->purchase_price,
-        'sale_price' => $request->sale_price,
-        'stock_quantity' => $request->stock_quantity,
-        'minimum_stock' => $request->minimum_stock,
-        'image' => $request->image,
-        'status' => $request->status,
-        'description' => $request->description,
-        'observation' => $request->observation
-      ]);
+    $validatedData = $request->validate([
+      'name' => 'required|string|max:255|min:4',
+      'brand' => 'required|string|max:100',
+      'ean' => 'required|string|max:50|unique:products,ean',
+      'measurement_unit_id' => 'required|integer|exists:measurement_unit,id',
+      'purchase_price' => 'required|numeric|between:0,999999999.99',
+      'sale_price' => 'required|numeric|between:0,999999999.99',
+      'stock_quantity' => 'required|integer|min:0',
+      'minimum_stock' => 'required|integer|min:0',
+      'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+      'status' => 'required|boolean',
+      'description' => 'required|string',
+      'observation' => 'nullable|string',
+    ]);
+
+    try {
+      DB::beginTransaction();
+
+      $imagePath = 'assets/img/products';
+      $image = $request->file('image');
+      $imageName = time() . '.' . $image->getClientOriginalExtension();
+      $image->move(public_path($imagePath), $imageName);
+      $validatedData['image'] = $imagePath . '/' . $imageName;
+
+      Product::create($validatedData);
+
+      DB::commit();
 
       return redirect()->route('products.index')
         ->with('success', 'Produto criado com sucesso.');
-    } catch (\Throwable $th) {
-      echo $th;
-      // return redirect()->route('products.index')
-      //   ->with('error', 'Erro ao salvar produto. ' . $th->getMessage());
+    } catch (\Exception $e) {
+      DB::rollBack();
+
+      return redirect()->route('products.index')
+        ->with('error', 'Erro ao salvar produto. ' . $e->getMessage());
     }
   }
 
