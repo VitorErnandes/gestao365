@@ -1,5 +1,1 @@
-function isValidEmail(email) {
-  var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  return regex.test(email);
-}
+function isValidEmail(s){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)}
