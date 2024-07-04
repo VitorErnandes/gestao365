@@ -1,1 +1,48 @@
-function formValidation(){const e=document.getElementById("name").value,t=document.getElementById("brand").value,n=document.getElementById("ean").value,d=document.getElementById("measurement_unit").value,u=(document.getElementById("purchase_price").value,document.getElementById("sale_price").value),o=(document.getElementById("stock_quantity").value,document.getElementById("minimum_stock").value),m=document.getElementById("image").value,l=(document.getElementById("status").value,document.getElementById("description").value),a=(document.getElementById("observation").value,document.getElementById("submitButton"));e.length>5&&t.length>3&&""!=n&&""!=d&&""!=u&&o>0&&""!=m&&l.length>20?a.removeAttribute("disabled"):a.setAttribute("disabled","disabled")}document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".form-control").forEach((function(e){e.addEventListener("change",(function(e){formValidation()})),e.addEventListener("click",(function(e){formValidation()})),e.addEventListener("keyup",(function(e){formValidation()}))}))}));
+document.addEventListener('DOMContentLoaded', function () {
+  const inputs = document.querySelectorAll('.form-control');
+
+  inputs.forEach(function (input) {
+    input.addEventListener('change', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('click', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('keyup', function (event) {
+      formValidation();
+    });
+  });
+});
+
+function formValidation() {
+  const name = document.getElementById('name').value;
+  const brand = document.getElementById('brand').value;
+  const ean = document.getElementById('ean').value;
+  const measurement_unit = document.getElementById('measurement_unit').value;
+  const purchase_price = document.getElementById('purchase_price').value;
+  const sale_price = document.getElementById('sale_price').value;
+  const stock_quantity = document.getElementById('stock_quantity').value;
+  const minimum_stock = document.getElementById('minimum_stock').value;
+  const image = document.getElementById('image').value;
+  const status = document.getElementById('status').value;
+  const description = document.getElementById('description').value;
+  const observation = document.getElementById('observation').value;
+  const submitButton = document.getElementById('submitButton');
+
+  if (
+    name.length > 5 &&
+    brand.length > 3 &&
+    ean != '' &&
+    measurement_unit != '' &&
+    sale_price != '' &&
+    minimum_stock > 0 &&
+    image != '' &&
+    description.length > 20
+  ) {
+    submitButton.removeAttribute('disabled');
+  } else {
+    submitButton.setAttribute('disabled', 'disabled');
+  }
+}

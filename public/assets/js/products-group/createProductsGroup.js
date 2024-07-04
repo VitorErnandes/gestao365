@@ -1,1 +1,30 @@
-function formValidation(){const e=document.getElementById("name").value,t=(document.getElementById("status").value,document.getElementById("description").value),n=document.getElementById("submitButton");e.length>5&&t.length>10?n.removeAttribute("disabled"):n.setAttribute("disabled","disabled")}document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".form-control").forEach((function(e){e.addEventListener("change",(function(e){formValidation()})),e.addEventListener("click",(function(e){formValidation()})),e.addEventListener("keyup",(function(e){formValidation()}))}))}));
+document.addEventListener('DOMContentLoaded', function () {
+  const inputs = document.querySelectorAll('.form-control');
+
+  inputs.forEach(function (input) {
+    input.addEventListener('change', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('click', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('keyup', function (event) {
+      formValidation();
+    });
+  });
+});
+
+function formValidation() {
+  const name = document.getElementById('name').value;
+  const status = document.getElementById('status').value;
+  const description = document.getElementById('description').value;
+  const submitButton = document.getElementById('submitButton');
+
+  if (name.length > 5 && description.length > 10) {
+    submitButton.removeAttribute('disabled');
+  } else {
+    submitButton.setAttribute('disabled', 'disabled');
+  }
+}

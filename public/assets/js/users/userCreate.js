@@ -1,1 +1,31 @@
-function formValidation(){const e=document.getElementById("name").value,t=document.getElementById("email").value,n=document.getElementById("password").value,d=document.getElementById("confirmPassword").value,o=document.getElementById("submitButton");e.length>2&&isValidEmail(t)&&n==d&&n.length>5?o.removeAttribute("disabled"):o.setAttribute("disabled","disabled")}document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".form-control").forEach((function(e){e.addEventListener("change",(function(e){formValidation()})),e.addEventListener("click",(function(e){formValidation()})),e.addEventListener("keyup",(function(e){formValidation()}))}))}));
+document.addEventListener('DOMContentLoaded', function () {
+  const inputs = document.querySelectorAll('.form-control');
+
+  inputs.forEach(function (input) {
+    input.addEventListener('change', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('click', function (event) {
+      formValidation();
+    });
+
+    input.addEventListener('keyup', function (event) {
+      formValidation();
+    });
+  });
+});
+
+function formValidation() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+  const submitButton = document.getElementById('submitButton');
+
+  if (name.length > 2 && isValidEmail(email) && password == confirmPassword && password.length > 5) {
+    submitButton.removeAttribute('disabled');
+  } else {
+    submitButton.setAttribute('disabled', 'disabled');
+  }
+}
