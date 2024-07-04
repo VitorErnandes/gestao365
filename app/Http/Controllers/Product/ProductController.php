@@ -30,6 +30,7 @@ class ProductController extends Controller
 
   public function store(Request $request)
   {
+
     $request->merge(['measurement_unit_id' => $request->measurement_unit]);
 
     $validatedData = $request->validate([
@@ -37,24 +38,26 @@ class ProductController extends Controller
       'brand' => 'required|string|max:100',
       'ean' => 'required|string|max:50|unique:products,ean',
       'measurement_unit_id' => 'required|integer|exists:measurement_unit,id',
-      'purchase_price' => 'required|numeric|between:0,999999999.99',
-      'sale_price' => 'required|numeric|between:0,999999999.99',
+      'purchase_price' => 'required',
+      'sale_price' => 'required',
       'stock_quantity' => 'required|integer|min:0',
       'minimum_stock' => 'required|integer|min:0',
-      'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+      'image' => 'required|image|max:2048',
       'status' => 'required|boolean',
       'description' => 'required|string',
       'observation' => 'nullable|string',
     ]);
 
+    $validatedData['purchase_price'] = str_replace(",", ".", str_replace(".", "", $request->purchase_price));
+    $validatedData['sale_price'] = str_replace(",", ".", str_replace(".", "", $request->sale_price));
+
+    $imagePath = 'assets/img/products';
+    $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+    $request->file('image')->move(public_path($imagePath), $imageName);
+    $validatedData['image'] = $imagePath . '/' . $imageName;
+
     try {
       DB::beginTransaction();
-
-      $imagePath = 'assets/img/products';
-      $image = $request->file('image');
-      $imageName = time() . '.' . $image->getClientOriginalExtension();
-      $image->move(public_path($imagePath), $imageName);
-      $validatedData['image'] = $imagePath . '/' . $imageName;
 
       Product::create($validatedData);
 
@@ -79,18 +82,17 @@ class ProductController extends Controller
   public function update(Request $request, Product $product)
   {
     try {
-      $request->validate([
-        'code' => 'required|string|max:50|unique:products,code',
+      $validatedData = $request->validate([
         'name' => 'required|string|max:255|min:4',
-        'brand' => 'nullable|string|max:100',
+        'brand' => 'required|string|max:100',
         'ean' => 'required|string|max:50|unique:products,ean',
         'measurement_unit' => 'required|integer|exists:measurement_unit,id',
-        'purchase_price' => 'required|numeric|min:0',
-        'sale_price' => 'required|numeric|min:0',
+        'purchase_price' => 'required|numeric',
+        'sale_price' => 'required|numeric',
         'stock_quantity' => 'required|integer|min:0',
         'minimum_stock' => 'required|integer|min:0',
-        'image' => 'nullable|string|max:255',
-        'status' => 'required|in:active,inactive',
+        'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+        'status' => 'required|boolean',
         'description' => 'required|string',
         'observation' => 'nullable|string',
       ]);

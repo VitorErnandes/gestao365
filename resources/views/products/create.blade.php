@@ -41,11 +41,11 @@
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="ean" class="form-label">Preço de compra</label>
-                    <input type="text" class="form-control" id="purchase_price" name="purchase_price" required>
+                    <input type="text" class="form-control money" id="purchase_price" name="purchase_price" required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="sale_price" class="form-label">Preço de venda</label>
-                    <input type="text" class="form-control" id="sale_price" name="sale_price" required>
+                    <input type="text" class="form-control money" id="sale_price" name="sale_price" required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="measurement_unit" class="form-label">Unidade de medida</label>
