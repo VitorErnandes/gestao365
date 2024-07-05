@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product\ProductsGroup;
 use App\Models\Product\MeasurementUnit;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -104,6 +105,21 @@ class ProductController extends Controller
     } catch (\Throwable $th) {
       return redirect()->route('products.index')
         ->with('error', 'Erro ao alterar produto. ' . $th->getMessage());
+    }
+  }
+
+  public function destroy(Product $product)
+  {
+    try {
+      $product->delete();
+
+      Session::flash('success', 'Produto excluído com sucesso.');
+
+      return true;
+    } catch (\Exception $e) {
+      Session::flash('error', 'Erro ao excluir produto. ' . $e->getMessage());
+
+      return false;
     }
   }
 }
