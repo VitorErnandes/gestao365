@@ -39,7 +39,7 @@
                                         data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
                                     <div class="dropdown-menu">
                                         @can('Alterar produto')
-                                            <a class="dropdown-item" href="users/{{ $product->id }}/edit"><i
+                                            <a class="dropdown-item" href="products/{{ $product->id }}/edit"><i
                                                     class="bx bx-edit-alt me-1"></i>
                                                 Editar</a>
                                         @endcan

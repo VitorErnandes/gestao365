@@ -77,26 +77,44 @@ class ProductController extends Controller
   public function edit($id)
   {
     $product = Product::find($id);
-    return view('products.edit', compact('product'));
+
+    $productsGroup = new ProductsGroup();
+    $productsGroupList = $productsGroup->all();
+
+    $unit = new MeasurementUnit();
+    $unitList = $unit->all();
+
+    return view('products.edit', compact('product', 'productsGroupList', 'unitList'));
   }
 
   public function update(Request $request, Product $product)
   {
     try {
+      $request->merge(['measurement_unit_id' => $request->measurement_unit]);
+
       $validatedData = $request->validate([
         'name' => 'required|string|max:255|min:4',
         'brand' => 'required|string|max:100',
         'ean' => 'required|string|max:50|unique:products,ean',
-        'measurement_unit' => 'required|integer|exists:measurement_unit,id',
-        'purchase_price' => 'required|numeric',
-        'sale_price' => 'required|numeric',
+        'measurement_unit_id' => 'required|integer|exists:measurement_unit,id',
+        'purchase_price' => 'required',
+        'sale_price' => 'required',
         'stock_quantity' => 'required|integer|min:0',
         'minimum_stock' => 'required|integer|min:0',
-        'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         'status' => 'required|boolean',
         'description' => 'required|string',
         'observation' => 'nullable|string',
       ]);
+
+      $validatedData['purchase_price'] = str_replace(",", ".", str_replace(".", "", $request->purchase_price));
+      $validatedData['sale_price'] = str_replace(",", ".", str_replace(".", "", $request->sale_price));
+
+      if ($request['image']) {
+        $imagePath = 'assets/img/products';
+        $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move(public_path($imagePath), $imageName);
+        $validatedData['image'] = $imagePath . '/' . $imageName;
+      }
 
       $product->update($request->all());
 
