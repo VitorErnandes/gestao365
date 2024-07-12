@@ -33,12 +33,14 @@ class ProductController extends Controller
   {
 
     $request->merge(['measurement_unit_id' => $request->measurement_unit]);
+    $request->merge(['products_group_id' => $request->products_group]);
 
     $validatedData = $request->validate([
       'name' => 'required|string|max:255|min:4',
       'brand' => 'required|string|max:100',
       'ean' => 'required|string|max:50|unique:products,ean',
       'measurement_unit_id' => 'required|integer|exists:measurement_unit,id',
+      'products_group_id' => 'required|integer|exists:products_group,id',
       'purchase_price' => 'required',
       'sale_price' => 'required',
       'stock_quantity' => 'required|integer|min:0',
@@ -91,12 +93,14 @@ class ProductController extends Controller
   {
     try {
       $request->merge(['measurement_unit_id' => $request->measurement_unit]);
+      $request->merge(['products_group_id' => $request->products_group]);
 
       $validatedData = $request->validate([
         'name' => 'required|string|max:255|min:4',
         'brand' => 'required|string|max:100',
-        'ean' => 'required|string|max:50|unique:products,ean',
+        'ean' => 'required|string|max:50|unique:products,ean,' . $product->id,
         'measurement_unit_id' => 'required|integer|exists:measurement_unit,id',
+        'products_group_id' => 'required|integer|exists:products_group,id',
         'purchase_price' => 'required',
         'sale_price' => 'required',
         'stock_quantity' => 'required|integer|min:0',
@@ -116,7 +120,7 @@ class ProductController extends Controller
         $validatedData['image'] = $imagePath . '/' . $imageName;
       }
 
-      $product->update($request->all());
+      $product->update($validatedData);
 
       return redirect()->route('products.index')
         ->with('success', 'Produto alterado com sucesso.');

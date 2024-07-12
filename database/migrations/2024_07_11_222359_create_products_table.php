@@ -19,6 +19,7 @@ return new class extends Migration
                 $table->string('brand', 100);
                 $table->string('ean', 50)->unique();
                 $table->foreignId('measurement_unit_id')->constrained()->references('measurement_unit');
+                $table->foreignId('products_group_id')->constrained('products_group');
                 $table->decimal('purchase_price', 10, 2);
                 $table->decimal('sale_price', 10, 2);
                 $table->integer('stock_quantity');

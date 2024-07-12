@@ -40,26 +40,28 @@
                     <select class="form-control" id="products_group" name="products_group" required>
                         @foreach ($productsGroupList as $group)
                             <option value="{{ $group->id }}"
-                                {{ $product->products_group == $group->id ? 'selected' : '' }}>{{ $group->name }}</option>
+                                {{ $product->products_group_id == $group->id ? 'selected' : '' }}>{{ $group->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="ean" class="form-label">Preço de compra</label>
                     <input type="text" class="form-control money" id="purchase_price" name="purchase_price"
-                        value={{ $product->purchase_price }} required>
+                        value={{ number_format($product->purchase_price, 2, ',', '.') }} required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="sale_price" class="form-label">Preço de venda</label>
                     <input type="text" class="form-control money" id="sale_price" name="sale_price"
-                        value={{ $product->sale_price }} required>
+                        value={{ number_format($product->sale_price, 2, ',', '.') }} required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="measurement_unit" class="form-label">Unidade de medida</label>
                     <select class="form-control" id="measurement_unit" name="measurement_unit" required>
                         @foreach ($unitList as $unit)
                             <option value="{{ $unit->id }}"
-                                {{ $product->measurement_unit == $unit->id ? 'selected' : '' }}>
+                                {{ $product->measurement_unit_id == $unit->id ? 'selected' : '' }}>
+                                {{ $unit->description }}
                             </option>
                         @endforeach
                     </select>

@@ -17,6 +17,7 @@ class Product extends Model
         'brand',
         'ean',
         'measurement_unit_id',
+        'products_group_id',
         'purchase_price',
         'sale_price',
         'stock_quantity',
