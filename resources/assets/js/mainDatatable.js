@@ -1,4 +1,10 @@
-window.onload = function () {
+window.onload = async function () {
+  await startDatatables();
+
+  await stylizingDatatables();
+};
+
+async function startDatatables() {
   $('#mainTable').DataTable({
     paging: false,
     scrollY: '70vh',
@@ -419,20 +425,16 @@ window.onload = function () {
       }
     }
   });
+}
 
+async function stylizingDatatables() {
   $('.dataTables_length').addClass('mt-0 mt-md-3 me-2');
   $('.dt-action-buttons').addClass('pt-0');
   $('.dt-buttons').addClass('d-flex flex-wrap mb-2');
   $('.dt-buttons').removeClass('dt-buttons');
   $('.card-header').addClass('justify-content-between');
 
-  $('.datatables-customers tbody').on('click', '.delete-record', function () {
-    e.row($(this).parents('tr')).remove().draw();
-  });
-
-  setTimeout(() => {
-    $('.dataTables_filter .form-control').removeClass('form-control-sm');
-    $('#dt-search-0').addClass('mb-2').removeClass('form-control-sm');
-    $('.dataTables_length .form-select').removeClass('form-select-sm');
-  }, 300);
-};
+  $('.dataTables_filter .form-control').removeClass('form-control-sm');
+  $('#dt-search-0').addClass('mb-2').removeClass('form-control-sm');
+  $('.dataTables_length .form-select').removeClass('form-select-sm');
+}
