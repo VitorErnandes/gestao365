@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
+
+  public function __construct()
+  {
+    $this->middleware('permission:Visualizar produtos', ['only' => ['index']]);
+    $this->middleware('permission:Cadastrar produto', ['only' => ['create', 'store']]);
+    $this->middleware('permission:Alterar produto', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:Excluir produto', ['only' => ['destroy']]);
+  }
+
   public function index()
   {
     $products = Product::all();
