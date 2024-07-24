@@ -1,4 +1,6 @@
 window.onload = async function () {
+  const permission = await validateAddRegisterPermission();
+
   await startDatatables();
 
   await stylizingDatatables();
@@ -437,4 +439,17 @@ async function stylizingDatatables() {
   $('.dataTables_filter .form-control').removeClass('form-control-sm');
   $('#dt-search-0').addClass('mb-2').removeClass('form-control-sm');
   $('.dataTables_length .form-select').removeClass('form-select-sm');
+}
+
+async function validateAddRegisterPermission() {
+  $.ajax({
+    type: 'GET',
+    url: 'url',
+    data: 'data',
+    dataType: 'dataType',
+    success: function (response) {},
+    error: function (error) {
+      console.log(error.responseText);
+    }
+  });
 }
