@@ -10,6 +10,7 @@ Route::middleware('auth')->group(function () {
 
     require __DIR__ . '/users/web.php';
     require __DIR__ . '/products/web.php';
+    require __DIR__ . '/customers/web.php';
 
     Route::get('/dashboard', [GlobalController::class, 'dashboard'])
         ->name('dashboard');
