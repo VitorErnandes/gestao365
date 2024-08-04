@@ -5,7 +5,7 @@
 
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Cadastro de produtos')
+@section('title', 'Cadastro de clientes')
 
 @section('content')
     <div class="card p-3">
@@ -32,28 +32,12 @@
                     <input type="number" class="form-control" id="ean" name="ean" required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                    <label for="products_group" class="form-label">Grupo de produtos</label>
-                    <select class="form-control" id="products_group" name="products_group" required>
-                        @foreach ($productsGroupList as $group)
-                            <option value="{{ $group->id }}">{{ $group->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-lg-3 col-sm-12">
                     <label for="ean" class="form-label">Preço de compra</label>
                     <input type="text" class="form-control money" id="purchase_price" name="purchase_price" required>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="sale_price" class="form-label">Preço de venda</label>
                     <input type="text" class="form-control money" id="sale_price" name="sale_price" required>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <label for="measurement_unit" class="form-label">Unidade de medida</label>
-                    <select class="form-control" id="measurement_unit" name="measurement_unit" required>
-                        @foreach ($unitList as $unit)
-                            <option value="{{ $unit->id }}">{{ $unit->description }}</option>
-                        @endforeach
-                    </select>
                 </div>
                 <div class="col-lg-3 col-sm-12">
                     <label for="stock_quantity" class="form-label">Quantidade de estoque</label>
@@ -91,4 +75,4 @@
 @endsection
 
 <script src="{{ asset(mix('assets/js/globals/validation.js')) }}"></script>
-<script src="{{ asset(mix('assets/js/products-group/createProductsGroup.js')) }}"></script>
+<script src="{{ asset(mix('assets/js/customers/createCustomers.js')) }}"></script>

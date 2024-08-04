@@ -9,6 +9,11 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return view('products.index');
+        return view('customers.index');
+    }
+
+    public function create()
+    {
+        return view('customers.create');
     }
 }
