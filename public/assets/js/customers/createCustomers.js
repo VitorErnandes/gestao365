@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   const inputs = document.querySelectorAll('.form-control');
+  const customerType = document.getElementById('customerType');
 
   inputs.forEach(function (input) {
     input.addEventListener('change', function (event) {
@@ -14,35 +15,48 @@ document.addEventListener('DOMContentLoaded', function () {
       formValidation();
     });
   });
+
+  customerType.addEventListener('change', function (event) {
+    custumerTypeValidation(this);
+  });
+
+  customerType.dispatchEvent(new Event('change'));
+
+  document.getElementById('cep').addEventListener('change', function (event) {
+    cepValidation(this);
+  });
 });
 
-function formValidation() {
-  const name = document.getElementById('name').value;
-  const brand = document.getElementById('brand').value;
-  const ean = document.getElementById('ean').value;
-  const measurement_unit = document.getElementById('measurement_unit').value;
-  const purchase_price = document.getElementById('purchase_price').value;
-  const sale_price = document.getElementById('sale_price').value;
-  const stock_quantity = document.getElementById('stock_quantity').value;
-  const minimum_stock = document.getElementById('minimum_stock').value;
-  const image = document.getElementById('image').value;
-  const status = document.getElementById('status').value;
-  const description = document.getElementById('description').value;
-  const observation = document.getElementById('observation').value;
-  const submitButton = document.getElementById('submitButton');
+function formValidation() {}
 
-  if (
-    name.length > 5 &&
-    brand.length > 3 &&
-    ean != '' &&
-    measurement_unit != '' &&
-    sale_price != '' &&
-    minimum_stock > 0 &&
-    image != '' &&
-    description.length > 20
-  ) {
-    submitButton.removeAttribute('disabled');
+function custumerTypeValidation(e) {
+  const physicalCustomer = document.getElementById('physicalCustomer');
+  const legalCustomer = document.getElementById('legalCustomer');
+
+  if (e.value == 2) {
+    physicalCustomer.classList.add('d-none');
+    legalCustomer.classList.remove('d-none');
   } else {
-    submitButton.setAttribute('disabled', 'disabled');
+    legalCustomer.classList.add('d-none');
+    physicalCustomer.classList.remove('d-none');
   }
+}
+
+function cepValidation(e) {
+  const url = 'https://viacep.com.br/ws/' + e.value + '/json/';
+
+  $.ajax({
+    type: 'get',
+    url: url,
+    dataType: 'JSON',
+    success: function (response) {
+      document.getElementById('address').value = response.logradouro;
+      document.getElementById('neighborhood').value = response.bairro;
+      document.getElementById('city').value = response.localidade;
+      document.getElementById('uf').value = response.uf;
+    },
+    error: function (error) {
+      alert('CEPwwwww inválido. ' + error.responseText);
+    }
+  });
 }

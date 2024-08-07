@@ -19,52 +19,100 @@
         <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-lg-8 col-sm-12">
+                <div class="col-lg-3 col-sm-12">
+                    <label for="customerType">Tipo de cliente</label>
+                    <select class="form-select" id="customerType" name="customerType" required>
+                        <option value="1" selected>Físico</option>
+                        <option value="2">Jurídico</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" id="physicalCustomer">
+                <div class="col-lg-6 col-sm-12 mt-3">
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-                <div class="col-lg-4 col-sm-12">
-                    <label for="brand" class="form-label">Marca</label>
-                    <input type="text" class="form-control" id="brand" name="brand" required>
+                <div class="col-lg-3 col-sm-12 mt-3">
+                    <label for="birthdayDate" class="form-label">Data Nascimento</label>
+                    <input type="date" class="form-control" id="birthdayDate" name="birthdayDate" required>
                 </div>
-                <div class="col-lg-3 col-sm-12">
-                    <label for="ean" class="form-label">Código de barras</label>
-                    <input type="number" class="form-control" id="ean" name="ean" required>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <label for="ean" class="form-label">Preço de compra</label>
-                    <input type="text" class="form-control money" id="purchase_price" name="purchase_price" required>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <label for="sale_price" class="form-label">Preço de venda</label>
-                    <input type="text" class="form-control money" id="sale_price" name="sale_price" required>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <label for="stock_quantity" class="form-label">Quantidade de estoque</label>
-                    <input type="text" class="form-control" id="stock_quantity" name="stock_quantity" required>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <label for="minimum_stock" class="form-label">Estoque minimo</label>
-                    <input type="text" class="form-control" id="minimum_stock" name="minimum_stock" required>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <label for="status" class="form-label">Status</label>
-                    <select class="form-control" id="status" name="status" required>
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
+                <div class="col-lg-3 col-sm-12 mt-3">
+                    <label for="gender" class="form-label">Nome</label>
+                    <select name="gender" id="gender" class="form-control">
+                        <option value="0">Masculino</option>
+                        <option value="1">Feminino</option>
                     </select>
                 </div>
-                <div class="col-lg-12 col-sm-12">
-                    <label for="image" class="form-label">Imagem</label>
-                    <input type="file" name="image" id="image" class="form-control" required>
+                <div class="col-lg-4 col-sm-12 mt-3">
+                    <label for="cpf" class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="cpf" name="cpf" required>
                 </div>
-                <div class="col-lg-12 col-sm-12">
-                    <label for="description" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="description" name="description"></textarea>
+                <div class="col-lg-4 col-sm-12 mt-3">
+                    <label for="rg" class="form-label">RG</label>
+                    <input type="text" class="form-control" id="rg" name="rg" required>
                 </div>
-                <div class="col-lg-12 col-sm-12">
+                <div class="col-lg-4 col-sm-12 mt-3">
+                    <label for="maritalStatus" class="form-label">Estado civil</label>
+                    <select name="maritalStatus" id="maritalStatus" class="form-control">
+                        <option value="0">Casado</option>
+                        <option value="1">Solteiro</option>
+                        <option value="2">Viúvo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row" id="legalCustomer">
+                <div class="col-lg-6 col-sm-12 mt-3">
+                    <label for="name" class="form-label">Razão social</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="col-lg-6 col-sm-12 mt-3">
+                    <label for="name" class="form-label">Nome Fantasia</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="col-lg-4 col-sm-12 mt-3">
+                    <label for="companyFounding" class="form-label">Data fundação</label>
+                    <input type="date" class="form-control" id="companyFounding" name="companyFounding" required>
+                </div>
+                <div class="col-lg-4 col-sm-12 mt-3">
+                    <label for="cnpj" class="form-label">CNPJ</label>
+                    <input type="text" class="form-control" id="cnpj" name="cnpj" required>
+                </div>
+                <div class="col-lg-4 col-sm-12 mt-3">
+                    <label for="ie" class="form-label">RG</label>
+                    <input type="text" class="form-control" id="ie" name="ie" required>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-lg-3 col-sm-12 mt-3">
+                    <label for="cep" class="form-label">CEP</label>
+                    <input type="text" class="form-control" id="cep" name="cep" required>
+                </div>
+                <div class="col-lg-7 col-sm-12 mt-3">
+                    <label for="address" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
+                </div>
+                <div class="col-lg-2 col-sm-12 mt-3">
+                    <label for="numberAddress" class="form-label">Número</label>
+                    <input type="text" class="form-control" id="numberAddress" name="numberAddress" required>
+                </div>
+                <div class="col-lg-5 col-sm-12 mt-3">
+                    <label for="neighborhood" class="form-label">Bairro</label>
+                    <input type="text" class="form-control" id="neighborhood" name="neighborhood" required>
+                </div>
+                <div class="col-lg-5 col-sm-12 mt-3">
+                    <label for="city" class="form-label">Cidade</label>
+                    <input type="text" class="form-control" id="city" name="city" required>
+                </div>
+                <div class="col-lg-2 col-sm-12 mt-3">
+                    <label for="uf" class="form-label">Estado</label>
+                    <input type="text" class="form-control" id="uf" name="uf" disabled required>
+                </div>
+                <div class="col-lg-12 col-sm-12 mt-3">
                     <label for="observation" class="form-label">Observação</label>
-                    <textarea class="form-control" id="observation" name="observation"></textarea>
+                    <textarea name="observation" id="observation" class="form-control"></textarea>
                 </div>
                 <div class="mt-4">
                     <button type="submit" id="submitButton" class="btn btn-primary" disabled>Salvar</button>
