@@ -50,10 +50,10 @@ function cepValidation(e) {
     url: url,
     dataType: 'JSON',
     success: function (response) {
-      document.getElementById('address').value = response.logradouro;
-      document.getElementById('neighborhood').value = response.bairro;
-      document.getElementById('city').value = response.localidade;
-      document.getElementById('uf').value = response.uf;
+      document.getElementById('address').value = !response.erro ? response.logradouro : '';
+      document.getElementById('neighborhood').value = !response.erro ? response.bairro : '';
+      document.getElementById('city').value = !response.erro ? response.localidade : '';
+      document.getElementById('uf').value = !response.erro ? response.uf : '';
     },
     error: function (error) {
       alert('CEPwwwww inválido. ' + error.responseText);
