@@ -68,8 +68,8 @@
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="col-lg-6 col-sm-12 mt-3">
-                    <label for="name" class="form-label">Nome Fantasia</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <label for="fantasyName" class="form-label">Nome Fantasia</label>
+                    <input type="text" class="form-control" id="fantasyName" name="fantasyName" required>
                 </div>
                 <div class="col-lg-4 col-sm-12 mt-3">
                     <label for="companyFounding" class="form-label">Data fundação</label>
@@ -80,7 +80,7 @@
                     <input type="text" class="form-control" id="cnpj" name="cnpj" required>
                 </div>
                 <div class="col-lg-4 col-sm-12 mt-3">
-                    <label for="ie" class="form-label">RG</label>
+                    <label for="ie" class="form-label">IE</label>
                     <input type="text" class="form-control" id="ie" name="ie" required>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-lg-5 col-sm-12 mt-3">
                     <label for="city" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="city" name="city" required>
+                    <input type="text" class="form-control" id="city" name="city" disabled required>
                 </div>
                 <div class="col-lg-2 col-sm-12 mt-3">
                     <label for="uf" class="form-label">Estado</label>
