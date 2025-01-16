@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +28,11 @@ class UserController extends Controller
     return view('users.index', ['users' => $users]);
   }
 
+  public function listAll()
+  {
+    return User::all();
+  }
+
   public function create()
   {
     $roles = Role::pluck('name', 'name')->all();
@@ -46,7 +50,7 @@ class UserController extends Controller
         'email' => 'required|string|email|max:255',
         'password' => 'required|string|min:6',
         'roles' => 'required|array',
-        'roles.*' => 'exists:roles,name'
+        'roles.*' => 'exists:roles,name',
       ]);
 
       $request['password'] = Hash::make($request['password']);
@@ -96,7 +100,7 @@ class UserController extends Controller
     $user = User::find($id);
     $roles = Role::pluck('name', 'name')->all();
     $userRoles = $user->roles->pluck('name', 'name')->all();
-    return view('users.edit', ["user" => $user, "roles" => $roles, "userRoles" => $userRoles]);
+    return view('users.edit', ['user' => $user, 'roles' => $roles, 'userRoles' => $userRoles]);
   }
 
   public function updateUser(Request $request, $id)
@@ -107,7 +111,7 @@ class UserController extends Controller
       $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255' . $id,
-        'roles' => 'required'
+        'roles' => 'required',
       ]);
 
       $user = User::findOrFail($id);
@@ -138,8 +142,9 @@ class UserController extends Controller
   {
     $sessionId = Auth::user()->id;
 
-    if ($sessionId != $id)
+    if ($sessionId != $id) {
       return redirect()->route('users.editPassword', ['id' => $sessionId]);
+    }
 
     $user = User::find($id);
     return view('users.editPassword', compact('user'));

@@ -27,18 +27,42 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-function formValidation() {}
-
 function custumerTypeValidation(e) {
   const physicalCustomer = document.getElementById('physicalCustomer');
   const legalCustomer = document.getElementById('legalCustomer');
+  const physicalInputs = physicalCustomer.querySelectorAll('input, select');
+  const legalInputs = legalCustomer.querySelectorAll('input, select');
 
   if (e.value == 2) {
     physicalCustomer.classList.add('d-none');
     legalCustomer.classList.remove('d-none');
+
+    physicalInputs.forEach(input => {
+      input.removeAttribute('required');
+      input.setAttribute('disabled', 'true');
+      input.removeAttribute('name');
+    });
+
+    legalInputs.forEach(input => {
+      input.setAttribute('required', 'true');
+      input.removeAttribute('disabled');
+      input.setAttribute('name', input.id);
+    });
   } else {
     legalCustomer.classList.add('d-none');
     physicalCustomer.classList.remove('d-none');
+
+    legalInputs.forEach(input => {
+      input.removeAttribute('required');
+      input.setAttribute('disabled', 'true');
+      input.removeAttribute('name');
+    });
+
+    physicalInputs.forEach(input => {
+      input.setAttribute('required', 'true');
+      input.removeAttribute('disabled');
+      input.setAttribute('name', input.id);
+    });
   }
 }
 

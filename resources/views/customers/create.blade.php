@@ -16,7 +16,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             </button>
         </div>
-        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-lg-3 col-sm-12">
@@ -38,7 +38,7 @@
                     <input type="date" class="form-control" id="birthdayDate" name="birthdayDate" required>
                 </div>
                 <div class="col-lg-3 col-sm-12 mt-3">
-                    <label for="gender" class="form-label">Nome</label>
+                    <label for="gender" class="form-label">Genero</label>
                     <select name="gender" id="gender" class="form-control">
                         <option value="0">Masculino</option>
                         <option value="1">Feminino</option>
@@ -104,19 +104,20 @@
                 </div>
                 <div class="col-lg-5 col-sm-12 mt-3">
                     <label for="city" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="city" name="city" disabled required>
+                    <input type="text" class="form-control" id="city" name="city" readonly required>
                 </div>
                 <div class="col-lg-2 col-sm-12 mt-3">
                     <label for="uf" class="form-label">Estado</label>
-                    <input type="text" class="form-control" id="uf" name="uf" disabled required>
+                    <input type="text" class="form-control" id="uf" name="uf" readonly required>
                 </div>
                 <div class="col-lg-12 col-sm-12 mt-3">
                     <label for="observation" class="form-label">Observação</label>
                     <textarea name="observation" id="observation" class="form-control"></textarea>
                 </div>
-                <div class="mt-4">
-                    <button type="submit" id="submitButton" class="btn btn-primary" disabled>Salvar</button>
-                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" id="submitButton" class="btn btn-primary" disabled>Salvar</button>
             </div>
         </form>
     </div>
