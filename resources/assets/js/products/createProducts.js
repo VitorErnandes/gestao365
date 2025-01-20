@@ -36,7 +36,9 @@ function formValidation() {
     brand.length > 3 &&
     ean != '' &&
     measurement_unit != '' &&
+    purchase_price != '' &&
     sale_price != '' &&
+    stock_quantity > 0 &&
     minimum_stock > 0 &&
     image != '' &&
     description.length > 20

@@ -104,4 +104,4 @@
 @endsection
 
 <script src="{{ asset(mix('assets/js/globals/validation.js')) }}"></script>
-<script src="{{ asset(mix('assets/js/products-group/createProductsGroup.js')) }}"></script>
+<script src="{{ asset(mix('assets/js/products/createProducts.js')) }}"></script>
