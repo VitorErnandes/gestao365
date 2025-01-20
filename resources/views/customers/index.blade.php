@@ -15,6 +15,7 @@
                     <tr>
                         <th></th>
                         <th class="text-center">ID</th>
+                        <th>Tipo</th>
                         <th>Nome</th>
                         <th>Data Nasc / Fund</th>
                         <th>Endereço</th>
@@ -28,6 +29,7 @@
                         <tr>
                             <td></td>
                             <td class="text-center">{{ $customer->id }}</td>
+                            <td>{{ $customer->customer_type == 1 ? 'Físico' : 'Jurídico' }}</td>
                             <td>{{ $customer->name }}</td>
                             <td class="text-center">{{ $customer->birthday_date ?? $customer->company_founding }}</td>
                             <td>{{ $customer->address }}</td>

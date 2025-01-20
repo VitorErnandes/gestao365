@@ -1,4 +1,4 @@
-function deactivateProduct(e) {
+function deactivateCustomer(e) {
   const customer = e.value;
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
