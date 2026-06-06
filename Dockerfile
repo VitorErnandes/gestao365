@@ -28,6 +28,6 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available
 
 EXPOSE 80
 
-CMD php artisan config:clear && php artisan migrate --force --seed && apache2-foreground
+CMD apache2-foreground
 
 
