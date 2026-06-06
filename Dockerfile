@@ -28,4 +28,5 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available
 
 EXPOSE 80
 
-CMD php artisan config:clear && php artisan config:cache && php artisan migrate --force --seed && apache2-foreground
+CMD php artisan config:clear && php artisan config:cache && php artisan tinker --execute="echo env('DB_DATABASE');" && php artisan migrate --force --seed && apache2-foreground
+
