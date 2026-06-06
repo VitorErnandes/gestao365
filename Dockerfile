@@ -1,24 +1,31 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
-    git curl zip unzip libzip-dev libpng-dev libonig-dev libxml2-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath
+    git curl zip unzip libzip-dev libpng-dev \
+    libonig-dev libxml2-dev libcurl4-openssl-dev \
+    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
-COPY --from=node:18 /usr/local/bin/node /usr/local/bin/node
-COPY --from=node:18 /usr/local/lib/node_modules /usr/local/lib/node_modules
-RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+WORKDIR /var/www/html
+
 COPY . .
 
-RUN composer install --optimize-autoloader --no-dev --no-interaction
+RUN composer install --optimize-autoloader --no-dev --no-interaction --no-scripts
+
 RUN npm ci && npm run production
 
-RUN php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
+RUN chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
-EXPOSE $PORT
-CMD php artisan migrate --force --seed && php artisan serve --host=0.0.0.0 --port=$PORT
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
+    && a2enmod rewrite
+
+EXPOSE 80
+
+CMD php artisan config:clear && php artisan config:cache && php artisan migrate --force --seed && apache2-foreground
