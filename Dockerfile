@@ -28,5 +28,6 @@ RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available
 
 EXPOSE 80
 
-CMD php artisan config:clear && php artisan config:cache && printenv | grep -E "^DB_|^MYSQL|^DATABASE" && apache2-foreground
+CMD php artisan config:clear && php artisan migrate --force --seed && apache2-foreground
+
 
