@@ -1,6 +1,5 @@
 FROM php:8.2-fpm
 
-# Argumentos
 ARG user=laravel
 ARG uid=1000
 
@@ -30,12 +29,24 @@ RUN docker-php-ext-install \
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Criar usuário do sistema para rodar os comandos
+# Criar usuário
 RUN useradd -G www-data,root -u $uid -d /home/$user $user \
     && mkdir -p /home/$user/.composer \
     && chown -R $user:$user /home/$user
 
-# Definir diretório de trabalho
 WORKDIR /var/www
 
+# Copiar o código para dentro da imagem
+COPY --chown=$user:$user . .
+
 USER $user
+
+# Instalar dependências do Composer dentro da imagem
+RUN composer install --no-interaction --no-dev --optimize-autoloader
+
+# Permissões de storage
+RUN chmod -R 775 storage bootstrap/cache
+
+EXPOSE 8000
+
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
