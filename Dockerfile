@@ -29,23 +29,27 @@ RUN docker-php-ext-install \
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Criar usuário
+# Criar usuário e diretórios com permissão correta
 RUN useradd -G www-data,root -u $uid -d /home/$user $user \
     && mkdir -p /home/$user/.composer \
-    && chown -R $user:$user /home/$user
+    && chown -R $user:$user /home/$user \
+    && mkdir -p /var/www \
+    && chown -R $user:$user /var/www
 
 WORKDIR /var/www
 
-# Copiar o código para dentro da imagem
+# Copiar o código já com ownership correto
 COPY --chown=$user:$user . .
+
+# Criar pastas necessárias e ajustar permissões
+RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions \
+        storage/framework/views bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 USER $user
 
-# Instalar dependências do Composer dentro da imagem
+# Instalar dependências
 RUN composer install --no-interaction --no-dev --optimize-autoloader
-
-# Permissões de storage
-RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8000
 
